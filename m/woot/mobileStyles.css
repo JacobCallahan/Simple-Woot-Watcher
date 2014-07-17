@@ -52,24 +52,6 @@ a 				{color:white; text-decoration: none; max-height: 232px;}
   text-decoration: none;
 }
 
-.donateButton {
-  width:100%;
-  background: #ffff00;
-  background-image: -webkit-linear-gradient(top, #ffff00, #ffdd00);
-  background-image: -moz-linear-gradient(top, #ffff00, #ffdd00);
-  background-image: -ms-linear-gradient(top, #ffff00, #ffdd00);
-  background-image: -o-linear-gradient(top, #ffff00, #ffdd00);
-  background-image: linear-gradient(to bottom, #ffff00, #ffdd00);
-  text-shadow: 1px 1px 5px #2e2e2e;
-  font-family: Arial;
-  color: #ffffff;
-  border:none;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
-  text-align:center;
-}
-
 #footer {
   position:fixed;
   left:0px;
