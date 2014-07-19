@@ -13,9 +13,13 @@
 
 
 	session_start();
+
+	$shortNameArry = array("woot", "electronics", "computers", "home", "tools", "sport", "accessories", "kids", "shirt", "wine", "sellout")	
+	$CATEGORY_COUNT = 11;
+	$DEFAULT_PAGES = "11100000000";
 	
 	if (!isset($_SESSION["pages"])){
-		$_SESSION["pages"] = "111000000"; //the on/off state of the 
+		$_SESSION["pages"] = $DEFAULT_PAGES; //the on/off state of the 
 	}
 
 	if (@$_POST["wootOffCheck"]){
@@ -58,19 +62,12 @@
 		$_SESSION["pictures"] = "true";
 	}
 
-	$newPages = "";
-	if (@$_POST["page0"]) {$newPages = $newPages."1";} else{$newPages = $newPages."0";}
-	if (@$_POST["page1"]) {$newPages = $newPages."1";} else{$newPages = $newPages."0";}
-	if (@$_POST["page2"]) {$newPages = $newPages."1";} else{$newPages = $newPages."0";}
-	if (@$_POST["page3"]) {$newPages = $newPages."1";} else{$newPages = $newPages."0";}
-	if (@$_POST["page4"]) {$newPages = $newPages."1";} else{$newPages = $newPages."0";}
-	if (@$_POST["page5"]) {$newPages = $newPages."1";} else{$newPages = $newPages."0";}
-	if (@$_POST["page6"]) {$newPages = $newPages."1";} else{$newPages = $newPages."0";}
-	if (@$_POST["page7"]) {$newPages = $newPages."1";} else{$newPages = $newPages."0";}
-	if (@$_POST["page8"]) {$newPages = $newPages."1";} else{$newPages = $newPages."0";}
-	if (@$_POST["page9"]) {$newPages = $newPages."1";} else{$newPages = $newPages."0";}
-	if (@$_POST["page10"]) {$newPages = $newPages."1";} else{$newPages = $newPages."0";}
-	if ($newPages == "00000000000") {$newPages = "11100000000";}
+	$testPages = "";
+	for ($i = 0; $i < $CATEGORY_COUNT; $i++) {
+		if (@$_POST["page" . $i]) {$newPages = $newPages."1";} else{$newPages = $newPages."0";}
+		$testPages .= "0";
+	}
+	if ($newPages == $testPages) {$newPages = $DEFAULT_PAGES;}
 	$_SESSION["pages"] = $newPages;
 
 ?>
@@ -176,48 +173,18 @@
 				    	ajaxData = data;  
 				    	//console.log(ajaxData);				    	
 
-						if ($('#woot').length != 0) {
-							getContent(".woot", "#woot", 0, ajaxData);
-						}
-
-						if ($('#electronics').length != 0) {
-							getContent(".electronics-woot", "#electronics", 1, ajaxData);
-						}
-
-						if ($('#computers').length != 0) {
-							getContent(".computers-woot", "#computers", 2, ajaxData);
-						}
-
-						if ($('#home').length != 0) {
-							getContent(".home-woot", "#home", 3, ajaxData);
-						}
-
-						if ($('#tools').length != 0) {
-							getContent(".tools-woot", "#tools", 4, ajaxData);
-						}
-
-						if ($('#sport').length != 0) {
-							getContent(".sport-woot", "#sport", 5, ajaxData);
-						}
-
-						if ($('#access').length != 0) {
-							getContent(".accessories-woot", "#access", 6, ajaxData);
-						}
-
-						if ($('#kids').length != 0) {
-							getContent(".kids-woot", "#kids", 7, ajaxData);
-						}
-
-						if ($('#shirt').length != 0) {
-							getContent(".shirt-woot", "#shirt", 8, ajaxData);
-						}
-
-						if ($('#wine').length != 0) {
-							getContent(".wine-woot", "#wine", 9, ajaxData);
-						}
-
-						if ($('#sellout').length != 0) {
-							getContent(".sellout-woot", "#sellout", 10, ajaxData);
+						$i = 0;
+						foreach ($shortNameArry as $value) {
+							if ($value === "woot") {
+								echo "if ($('#" . $shortName . "').length != 0) {
+									getContent('." . $shortName . "', '#" . $shortName . "', " . $i . ", ajaxData);
+								}";
+							} else {
+								echo "if ($('#" . $shortName . "').length != 0) {
+									getContent('." . $shortName . "-woot', '#" . $shortName . "', " . $i . ", ajaxData);
+								}";
+							}
+							$i++;
 						}
 				    });
 				}
@@ -231,38 +198,18 @@
 		<div class="main">
 			<div class="wootHolder">
 				<?php
-					if (substr($_SESSION["pages"], 0, 1)==1) {
-						echo "<a href='#' id='page0Link' target='_blank'><div class='wootContent dark' id='woot'><div class='title' id='title0'>Loading...</div></div></a>";
-					}
-					if (substr($_SESSION["pages"], 1, 1)==1) {
-						echo "<a href='#' id='page1Link' target='_blank'><div class='wootContent dark' id='electronics'><div class='title' id='title1'>Loading...</div></div></a>";
-					}
-					if (substr($_SESSION["pages"], 2, 1)==1) {
-						echo "<a href='#' id='page2Link' target='_blank'><div class='wootContent dark' id='computers'><div class='title' id='title2'>Loading...</div></div></a>";
-					}
-					if (substr($_SESSION["pages"], 3, 1)==1) {
-						echo "<a href='#' id='page3Link' target='_blank'><div class='wootContent dark' id='home'><div class='title' id='title3'>Loading...</div></div></a>";
-					}
-					if (substr($_SESSION["pages"], 4, 1)==1) {
-						echo "<a href='#' id='page4Link' target='_blank'><div class='wootContent dark' id='tools'><div class='title' id='title4'>Loading...</div></div></a>";
-					}
-					if (substr($_SESSION["pages"], 5, 1)==1) {
-						echo "<a href='#' id='page5Link' target='_blank'><div class='wootContent dark' id='sport'><div class='title' id='title5'>Loading...</div></div></a>";
-					}
-					if (substr($_SESSION["pages"], 6, 1)==1) {
-						echo "<a href='#' id='page6Link' target='_blank'><div class='wootContent dark' id='access'><div class='title' id='title6'>Loading...</div></div></a>";
-					}
-					if (substr($_SESSION["pages"], 7, 1)==1) {
-						echo "<a href='#' id='page7Link' target='_blank'><div class='wootContent dark' id='kids'><div class='title' id='title7'>Loading...</div></div></a>";
-					}
-					if (substr($_SESSION["pages"], 8, 1)==1) {
-						echo "<a href='#' id='page8Link' target='_blank'><div class='wootContent dark' id='shirt'><div class='title' id='title8'>Loading...</div></div></a>";
-					}
-					if (substr($_SESSION["pages"], 9, 1)==1) {
-						echo "<a href='#' id='page9Link' target='_blank'><div class='wootContent dark' id='wine'><div class='title' id='title9'>Loading...</div></div></a>";
-					}
-					if (substr($_SESSION["pages"], 10, 1)==1) {
-						echo "<a href='#' id='page10Link' target='_blank'><div class='wootContent dark' id='sellout'><div class='title' id='title10'>Loading...</div></div></a>";
+					for ($i = 0; $i < $CATEGORY_COUNT; $i++) {
+						if (substr($_SESSION["pages"], $i, 1)==1) {
+							echo "<a href='#' id='page" . $i . "Link' target='_blank'>
+									<div class='wootContent dark' id='sport'>
+										<div class='title' id='title" . $i . "'>
+											Loading...
+										</div>
+									</div>
+								  </a>";
+						}
+						$page[$i] = "";
+						if (substr($_SESSION["pages"], $i, 1)==1) {$page[$i] = "checked";}
 					}
 				?>
 			</div>
@@ -275,33 +222,11 @@
 				?>
 				<h3>Woot Pages</h3>
 				<form action="index.php" id="content" enctype="multipart/form-data" method="post">
-					<?php
-						$page[0] = ""; $page[1] = ""; $page[2] = ""; $page[3] = ""; $page[4] = "";
-						$page[5] = ""; $page[6] = ""; $page[7] = "";  $page[8] = "";  $page[9] = ""; $page[10] = "";
-						
-						if (substr($_SESSION["pages"], 0, 1)==1) {$page[0] = "checked";}
-						if (substr($_SESSION["pages"], 1, 1)==1) {$page[1] = "checked";}
-						if (substr($_SESSION["pages"], 2, 1)==1) {$page[2] = "checked";}
-						if (substr($_SESSION["pages"], 3, 1)==1) {$page[3] = "checked";}
-						if (substr($_SESSION["pages"], 4, 1)==1) {$page[4] = "checked";}
-						if (substr($_SESSION["pages"], 5, 1)==1) {$page[5] = "checked";}
-						if (substr($_SESSION["pages"], 6, 1)==1) {$page[6] = "checked";}
-						if (substr($_SESSION["pages"], 7, 1)==1) {$page[7] = "checked";}
-						if (substr($_SESSION["pages"], 8, 1)==1) {$page[8] = "checked";}
-						if (substr($_SESSION["pages"], 9, 1)==1) {$page[9] = "checked";}
-						if (substr($_SESSION["pages"], 10, 1)==1) {$page[10] = "checked";}
-						
-						echo "<div class='minibox'><input type='checkbox' name='page0' ".$page[0]." value='1' form='content'/>Woot</div><br/>";
-						echo "<div class='minibox'><input type='checkbox' name='page1' ".$page[1]." value='1' form='content'/>Electronics</div><br/>";
-						echo "<div class='minibox'><input type='checkbox' name='page2' ".$page[2]." value='1' form='content'/>Computers</div><br/>";
-						echo "<div class='minibox'><input type='checkbox' name='page3' ".$page[3]." value='1' form='content'/>Home</div><br/>";
-						echo "<div class='minibox'><input type='checkbox' name='page4' ".$page[4]." value='1' form='content'/>Tools</div><br/>";
-						echo "<div class='minibox'><input type='checkbox' name='page5' ".$page[5]." value='1' form='content'/>Sport</div><br/>";
-						echo "<div class='minibox'><input type='checkbox' name='page6' ".$page[6]." value='1' form='content'/>Accessories</div><br/>";
-						echo "<div class='minibox'><input type='checkbox' name='page7' ".$page[7]." value='1' form='content'/>Kids</div><br/>";
-						echo "<div class='minibox'><input type='checkbox' name='page8' ".$page[8]." value='1' form='content'/>Shirt</div><br/>";
-						echo "<div class='minibox'><input type='checkbox' name='page9' ".$page[9]." value='1' form='content'/>Wine</div><br/>";
-						echo "<div class='minibox'><input type='checkbox' name='page10' ".$page[10]." value='1' form='content'/>Sellout</div><br/>";
+					<?phfor ($i = 0; $i < $CATEGORY_COUNT; $i++) {
+						$page[$i] = "";
+						if (substr($_SESSION["pages"], $i, 1)==1) {$page[$i] = "checked";}
+						echo "<div class='minibox'><input type='checkbox' name='page" . $i . "' ".$page[$i]." value='1' form='content'/>" . $shortNameArry[$i] . "</div><br/>";
+					}
 					?>					
 					<h3>Words to Watch</h3>
 					<?php
