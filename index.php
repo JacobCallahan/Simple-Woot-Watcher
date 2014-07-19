@@ -223,11 +223,12 @@
 				?>
 				<h3>Woot Pages</h3>
 				<form action="index.php" id="content" enctype="multipart/form-data" method="post">
-					<?phfor ($i = 0; $i < $CATEGORY_COUNT; $i++) {
-						$page[$i] = "";
-						if (substr($_SESSION["pages"], $i, 1)==1) {$page[$i] = "checked";}
-						echo "<div class='minibox'><input type='checkbox' name='page" . $i . "' ".$page[$i]." value='1' form='content'/>" . $shortNameArry[$i] . "</div><br/>";
-					}
+					<?php
+						for ($i = 0; $i < $CATEGORY_COUNT; $i++) {
+							$page[$i] = "";
+							if (substr($_SESSION["pages"], $i, 1)==1) {$page[$i] = "checked";}
+							echo "<div class='minibox'><input type='checkbox' name='page" . $i . "' ".$page[$i]." value='1' form='content'/>" . $shortNameArry[$i] . "</div><br/>";
+						}
 					?>					
 					<h3>Words to Watch</h3>
 					<?php
