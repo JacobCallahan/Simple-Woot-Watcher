@@ -37,6 +37,7 @@
 		$_SESSION["watching"] = $newWatchItems;
 	}
 
+	//todo: update this section to dynamically add elements to the array based off of $CATEGORY_COUNT
 	if (!isset($_SESSION["currentProducts"])){
 		$_SESSION["currentProducts"] = array(0 => "",
 										1 => "",
@@ -255,4 +256,3 @@
 		</div>
 	</body>
 </html>
-
