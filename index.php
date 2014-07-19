@@ -74,7 +74,6 @@
 	$_SESSION["pages"] = $newPages;
 
 ?>
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -175,7 +174,7 @@
 				    function(data,status) {
 				    	ajaxData = data;  
 				    	//console.log(ajaxData);				    	
-
+				    	//todo: convert to a for loop
 						if ($('#woot').length != 0) {
 							getContent(".woot", "#woot", 0, ajaxData);
 						}
@@ -230,7 +229,8 @@
 	<body>
 		<div class="main">
 			<div class="wootHolder">
-				<?php
+				<?php		    	
+				    	//todo: convert to a for loop
 					if (substr($_SESSION["pages"], 0, 1)==1) {
 						echo "<a href='#' id='page0Link' target='_blank'><div class='wootContent dark' id='woot'><div class='title' id='title0'>Loading...</div></div></a>";
 					}
@@ -278,7 +278,8 @@
 					<?php
 						$page[0] = ""; $page[1] = ""; $page[2] = ""; $page[3] = ""; $page[4] = "";
 						$page[5] = ""; $page[6] = ""; $page[7] = "";  $page[8] = "";  $page[9] = ""; $page[10] = "";
-						
+								    	
+				    	//todo: convert to a for loop
 						if (substr($_SESSION["pages"], 0, 1)==1) {$page[0] = "checked";}
 						if (substr($_SESSION["pages"], 1, 1)==1) {$page[1] = "checked";}
 						if (substr($_SESSION["pages"], 2, 1)==1) {$page[2] = "checked";}
@@ -290,7 +291,8 @@
 						if (substr($_SESSION["pages"], 8, 1)==1) {$page[8] = "checked";}
 						if (substr($_SESSION["pages"], 9, 1)==1) {$page[9] = "checked";}
 						if (substr($_SESSION["pages"], 10, 1)==1) {$page[10] = "checked";}
-						
+								    	
+				    	//todo: convert to a for loop
 						echo "<div class='minibox'><input type='checkbox' name='page0' ".$page[0]." value='1' form='content'/>Woot</div><br/>";
 						echo "<div class='minibox'><input type='checkbox' name='page1' ".$page[1]." value='1' form='content'/>Electronics</div><br/>";
 						echo "<div class='minibox'><input type='checkbox' name='page2' ".$page[2]." value='1' form='content'/>Computers</div><br/>";
@@ -326,6 +328,16 @@
 					<input type="submit" value="Save All Changes" />
 				</form>
 				<br/>
+				<div id="donate">
+					Help me keep this page running<br/> and AD-FREE!<br/>
+					<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+					">
+					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+				</div>
 			</div>
 		</div>
 	</body>
